@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code2, Home, User, Briefcase, Mail, FolderOpen } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Code2,
+  Home,
+  User,
+  Briefcase,
+  Mail,
+  FolderOpen,
+} from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -21,13 +21,12 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
+
       setTimeout(() => {
         setIsSubmitted(false);
       }, 3000);
@@ -51,7 +50,7 @@ const Contact: React.FC = () => {
       icon: MapPin,
       label: 'Location',
       value: 'palamaner, AndhraPradesh',
-      href: 'https://www.google.com/maps/place/Palamaner,+Andhra+Pradesh/data=!4m2!3m1!1s0x3bad7eaa422555ff:0xe0973a28f5397f55?sa=X&ved=1t:242&ictx=111'
+      href: 'https://www.google.com/maps/place/Palamaner,+Andhra+Pradesh'
     }
   ];
 
@@ -67,16 +66,16 @@ const Contact: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Get In <span className="bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">Touch</span>
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
             I'm currently open to full-time frontend development opportunities. If you're hiring or looking to collaborate on impactful projects, feel free to reach out—I’d love to connect!
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
+          <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700/50">
             <h3 className="text-2xl font-bold text-white mb-6">Send Message</h3>
-            
+
             {isSubmitted ? (
               <div className="text-center py-12">
                 <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
@@ -85,7 +84,7 @@ const Contact: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
                       Name
@@ -97,7 +96,7 @@ const Contact: React.FC = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 break-words whitespace-normal"
                       placeholder="Your Name"
                     />
                   </div>
@@ -112,12 +111,12 @@ const Contact: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 break-words whitespace-normal"
                       placeholder="your@email.com"
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-slate-300 mb-2">
                     Subject
@@ -129,11 +128,11 @@ const Contact: React.FC = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 break-words whitespace-normal"
                     placeholder="Project Collaboration"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
                     Message
@@ -145,11 +144,11 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none break-words whitespace-normal"
                     placeholder="Tell me about your project..."
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -168,11 +167,9 @@ const Contact: React.FC = () => {
             )}
           </div>
 
-          {/* Contact Information */}
           <div className="space-y-8">
-            <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
+            <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700/50">
               <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
-              
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <a
@@ -187,17 +184,18 @@ const Contact: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-sm text-slate-400">{info.label}</p>
-                      <p className="text-white font-medium">{info.value}</p>
+                      <p className="text-white font-medium break-words whitespace-normal overflow-hidden">
+                        {info.value}
+                      </p>
                     </div>
                   </a>
                 ))}
               </div>
             </div>
 
-            <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
+            <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700/50">
               <h3 className="text-2xl font-bold text-white mb-6">Follow Me</h3>
-              
-              <div className="flex space-x-4">
+              <div className="flex flex-wrap gap-4">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
@@ -211,11 +209,9 @@ const Contact: React.FC = () => {
                   </a>
                 ))}
               </div>
-
               <div className="mt-6 pt-6 border-t border-slate-700/50">
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  Available for full-time positions. 
-                  Let's create something amazing together!
+                <p className="text-slate-400 text-sm leading-relaxed break-words whitespace-normal">
+                  Available for full-time positions. Let’s create something amazing together!
                 </p>
               </div>
             </div>
