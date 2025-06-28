@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, Github, Linkedin } from 'lucide-react';
+import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  CheckCircle,
+  Github,
+  Linkedin,
+} from "lucide-react";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -22,41 +33,68 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const result = await emailjs.send(
+        "service_mg7oxeq",
+        "template_73kl4cm",
+        {
+          from_name: formData.name,
+          to_name: "Shireesha Bysegowni",
+          message: formData.message,
+          email: formData.email,
+          subject: formData.subject,
+        },
+        "McQhbAa_LxIGVPg54"
+      );
+
+      console.log("Email successfully sent:", result);
+
       setIsSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: "", email: "", subject: "", message: "" });
 
       setTimeout(() => {
         setIsSubmitted(false);
       }, 3000);
-    }, 1000);
+    } catch (error) {
+      console.error("Email sending error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
     {
       icon: Mail,
-      label: 'Email',
-      value: 'shireeshabysegownib@gmail.com',
-      href: 'mailto:shireeshabysegownib@gmail.com'
+      label: "Email",
+      value: "shireeshabysegownib@gmail.com",
+      href: "mailto:shireeshabysegownib@gmail.com",
     },
     {
       icon: Phone,
-      label: 'Phone',
-      value: '+91 9347028527',
-      href: 'tel:+919347028527'
+      label: "Phone",
+      value: "+91 9347028527",
+      href: "tel:+919347028527",
     },
     {
       icon: MapPin,
-      label: 'Location',
-      value: 'palamaner, AndhraPradesh',
-      href: 'https://www.google.com/maps/place/Palamaner,+Andhra+Pradesh'
-    }
+      label: "Location",
+      value: "palamaner, AndhraPradesh",
+      href: "https://www.google.com/maps/place/Palamaner,+Andhra+Pradesh",
+    },
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/shireeshabysegowni', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/shireesha-bysegowni/', label: 'LinkedIn' },
+    {
+      icon: Github,
+      href: "https://github.com/shireeshabysegowni",
+      label: "GitHub",
+    },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/shireesha-bysegowni/",
+      label: "LinkedIn",
+    },
   ];
 
   return (
@@ -64,10 +102,15 @@ const Contact: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Get In <span className="bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">Touch</span>
+            Get In{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
+              Touch
+            </span>
           </h2>
           <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-            I'm currently open to full-time frontend development opportunities. If you're hiring or looking to collaborate on impactful projects, feel free to reach out—I’d love to connect!
+            I'm currently open to full-time frontend development opportunities.
+            If you're hiring or looking to collaborate on impactful projects,
+            feel free to reach out—I’d love to connect!
           </p>
         </div>
 
@@ -79,14 +122,21 @@ const Contact: React.FC = () => {
             {isSubmitted ? (
               <div className="text-center py-12">
                 <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
-                <h4 className="text-xl font-semibold text-white mb-2">Message Sent!</h4>
-                <p className="text-slate-400">Thank you for reaching out. I'll get back to you soon.</p>
+                <h4 className="text-xl font-semibold text-white mb-2">
+                  Message Sent!
+                </h4>
+                <p className="text-slate-400">
+                  Thank you for reaching out. I'll get back to you soon.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-slate-300 mb-2"
+                    >
                       Name
                     </label>
                     <input
@@ -101,7 +151,10 @@ const Contact: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-slate-300 mb-2"
+                    >
                       Email
                     </label>
                     <input
@@ -118,7 +171,10 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-slate-300 mb-2">
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-slate-300 mb-2"
+                  >
                     Subject
                   </label>
                   <input
@@ -134,7 +190,10 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-slate-300 mb-2"
+                  >
                     Message
                   </label>
                   <textarea
@@ -169,14 +228,20 @@ const Contact: React.FC = () => {
 
           <div className="space-y-8">
             <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700/50">
-              <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">
+                Contact Information
+              </h3>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <a
                     key={index}
                     href={info.href}
-                    target={info.href.startsWith('http') ? '_blank' : undefined}
-                    rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    target={info.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      info.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
                     className="flex items-center space-x-4 p-4 rounded-lg hover:bg-slate-800/50 transition-all duration-300 group"
                   >
                     <div className="p-3 bg-gradient-to-r from-blue-600 to-teal-600 rounded-lg group-hover:scale-110 transition-transform duration-300">
@@ -211,7 +276,8 @@ const Contact: React.FC = () => {
               </div>
               <div className="mt-6 pt-6 border-t border-slate-700/50">
                 <p className="text-slate-400 text-sm leading-relaxed break-words whitespace-normal">
-                  Available for full-time positions. Let’s create something amazing together!
+                  Available for full-time positions. Let’s create something
+                  amazing together!
                 </p>
               </div>
             </div>
